@@ -15,9 +15,10 @@ public class CrmController extends BaseController {
     public String main(){
         return "main";
     }
-
+    
     @RequestMapping("welcome")
     public String welcome(){
         return "welcome";
     }
+    hello 
 }
