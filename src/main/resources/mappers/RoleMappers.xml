@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shsxt.crmdemo01.dao.RoleDao">
+    <select id="selectRole" parameterType="String" resultType="Role">
+        select t.*
+        from t_role t
+        <where>
+            <if test="roleName!=null and ''!=roleName">
+                and role_name = #{roleName}
+            </if>
+        </where>
+
+    </select>
+    <insert id="addRole" parameterType="Role">
+        insert into t_role
+        (id,
+        role_name,
+        role_remark,
+        create_date,
+        update_date,
+        is_valid)
+        values
+        (#{id},
+        #{roleName},
+        #{roleRemark},
+        #{createDate},
+        #{updateDate},
+        #{isValid})
+    </insert>
+
+    <select id="selectRoleById" parameterType="String" resultType="Role">
+        select t.*
+        from t_role t
+        where id=#{id}
+    </select>
+    <update id="updateRole" parameterType="Role">
+        update t_role
+        set role_name = #{roleName},role_remark=#{roleRemark}
+        where id=#{id}
+    </update>
+    <delete id="deleteRole" parameterType="String">
+        delete from t_role
+        where id in
+        <foreach collection="list" open="(" close=")" item="i" separator=",">
+            #{i}
+        </foreach>
+    </delete>
+
+</mapper>
